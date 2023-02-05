@@ -1,27 +1,27 @@
 import { initializeApp } from 'firebase/app';
-
 import {
   getAuth,
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from 'firebase/auth';
-
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCuvPDRTwHzfOLFLHLpTREeK5eE15pvAZE',
-  authDomain: 'crwn-clothing-db-13b76.firebaseapp.com',
-  projectId: 'crwn-clothing-db-13b76',
-  storageBucket: 'crwn-clothing-db-13b76.appspot.com',
-  messagingSenderId: '116575582847',
-  appId: '1:116575582847:web:5c8950731af977d37c5d4a',
+  apiKey: 'AIzaSyDDU4V-_QV3M8GyhC9SVieRTDM4dbiT0Yk',
+  authDomain: 'crwn-clothing-db-98d4d.firebaseapp.com',
+  projectId: 'crwn-clothing-db-98d4d',
+  storageBucket: 'crwn-clothing-db-98d4d.appspot.com',
+  messagingSenderId: '626766232035',
+  appId: '1:626766232035:web:506621582dab103a4d08d6',
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
+
 googleProvider.setCustomParameters({
   prompt: 'select_account',
 });
@@ -29,12 +29,10 @@ googleProvider.setCustomParameters({
 export const auth = getAuth();
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
-export const signinWithGoogleRedirect = () =>
+export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
-
-export default firebaseApp;
 
 export const createUserDocumentFromAuth = async (
   userAuth,
@@ -63,15 +61,15 @@ export const createUserDocumentFromAuth = async (
   }
 
   return userDocRef;
-
-  //if user data exists
-  //return userDocRef
-
-  //if user data does not exists
-  //create / set the document with the data from userAuth in my collection
 };
 
-export const createAuthUserwithEmailAndPassword = async (email, password) => {
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
+
   return await createUserWithEmailAndPassword(auth, email, password);
+};
+export const signInAuthUserwithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await signInWithEmailAndPassword(auth, email, password);
 };
